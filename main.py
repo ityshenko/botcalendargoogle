@@ -27,8 +27,7 @@ async def main():
     if trigger == 'schedule':
         service = get_gcal()
         tomorrow = (datetime.datetime.now() + datetime.timedelta(days=1)).strftime('%Y-%m-%d')
-        events = service.events().list(calendarId='primary', timeMin=f'{tomorrow}T00:00:00Z', timeMax=f'{tomorrow}T23:59:59Z', singleEvents=True, orderBy='startTime').execute().get('items', [])
-        msg = f"📅 Планы на завтра:\n\n"
+        events = service.events().list(calendarId='primary', timeMin=f'{tomorrow}T00:00:00Z', timeMax=f'{tomorrow}T23:59:59Z', singleEvents=True, orderBy='startTime').execute().get('items', [])  msg = f"📅 Планы на завтра:\n\n"
         if events:
             for e in events:
                 start = e['start'].get('dateTime', e['start'].get('date'))[11:16]
